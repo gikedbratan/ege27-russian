@@ -65,7 +65,7 @@ function tasks(){app.innerHTML=`<div class="page" style="max-width:1120px"><h1>�
 /* задание */
 let tab={};
 function task(n){const [,title,,max,mode]=T[n],D=DATA[n],R=ready(n);tab[n]=tab[n]||(D?'th':'pr');
- app.innerHTML=`<div class="page"><div class="phead"><span class="pnum">Задание ${n}</span><h1>${esc(title)}</h1><div class="tags"><span class="tag">${max} ${max===1?'балл':max<5?'балла':'баллов'}</span><span class="tag">${MODE[mode]}</span></div>${D?.stat?`<p class="muted" style="font-size:14px">${esc(D.stat)}</p>`:''}</div>
+ app.innerHTML=`<div class="page"><div class="phead"><span class="pnum">Задание ${n}</span><h1>${esc(title)}</h1><div class="tags"><span class="tag">${max} ${max===1?'балл':max<5?'балла':'баллов'}</span><span class="tag">${MODE[mode]}</span></div>${ST(n)?`<p class="muted" style="font-size:14px">${esc(ST(n))}</p>`:''}</div>
  ${R?`<div class="seg" role="tablist">${[['th','Теория'],['pr','Практика'],['qz','Вопросы']].map(([k,l])=>`<button role="tab" data-tab="${k}" class="${tab[n]===k?'on':''}">${l}</button>`).join('')}</div><div id="tb"></div>`
  :`<div class="card"><h3>Готовим материалы</h3><p class="muted" style="margin-top:6px">Теория, практика по задачам ФИПИ и вопросы появятся в следующих обновлениях.</p><div class="row" style="margin-top:14px"><a class="btn pri" href="#t15">Перейти к №15</a></div></div>`}</div>`;
  if(!R)return;const show=()=>{stopTimer();$$('[data-tab]').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab[n]));({th:theory,pr:practice,qz:quiz})[tab[n]](n,$('#tb'))};
